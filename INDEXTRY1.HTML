@@ -94,7 +94,7 @@
         }
         .playlist {
             width: 350px;
-            height: 450px;
+            height: 500px;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -106,6 +106,7 @@
             border-radius: 20px;
             animation: dance 3s ease-in-out infinite alternate;
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+            position: relative;
         }
         @keyframes dance {
             0% {
@@ -125,6 +126,19 @@
             margin-bottom: 25px;
             text-align: center;
             color: white; /* Text color for readability */
+        }
+        .description-box {
+            position: absolute;
+            top: 20px;
+            width: 80%;
+            padding: 20px;
+            background: rgba(30, 60, 114, 0.9); /* Semi-transparent matching color */
+            color: white;
+            font-size: 1.2rem;
+            font-weight: bold;
+            text-align: center;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
         }
         #about {
             background-color: #111; /* Black background */
@@ -167,15 +181,15 @@
     <section class="section" id="custom">
         <div class="playlist-container">
             <div class="playlist">
+                <div class="description-box">Create playlists tailored to your favorite genres, artists, or activities. Fully customizable to fit your taste!</div>
                 <h2>Quick Playlists</h2>
                 <p>Create personalized playlists tailored to your favorite genres, artists, or activities. Customize every aspect to make it uniquely yours.</p>
-                <!-- Updated Create Playlist button to navigate to chatbot1.html -->
                 <button class="btn btn-custom btn-lg" onclick="window.location.href='chatbot1.html'">Create Playlist</button>
             </div>
             <div class="playlist" id="mood">
+                <div class="description-box">Discover music that matches your mood. Find tracks that resonate with your emotions and energy.</div>
                 <h2>Mood Playlists</h2>
                 <p>Discover music that matches your current mood. Whether you're feeling happy, relaxed, or energetic, we've got the perfect tunes for you.</p>
-                <!-- Updated button to redirect to chatbot2.html -->
                 <button class="btn btn-custom btn-lg" onclick="window.location.href='chatbot2.html'">Explore Mood Music</button>
             </div>
         </div>
