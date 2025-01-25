@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crescendo Mood Playlist</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #282c34;
+            color: #fff;
+        }
+        header {
+            background-color: #1e1e2f;
+            padding: 10px 20px;
+            color: #fff;
+            text-align: center;
+        }
+        nav {
+            background-color: #1E3C72; /* Updated background color */
+            padding: 10px;
+            display: flex;
+            justify-content: flex-start;
+            gap: 20px;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        nav a:hover {
+            color: #ff8c00;
+        }
+        #chat-container {
+            max-width: 600px;
+            margin: 30px auto;
+            background-color: #3a3d47;
+            padding: 20px;
+            border-radius: 8px;
+            height: 500px;
+            overflow-y: auto;
+        }
+        .chat-message {
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            max-width: 70%;
+        }
+        .chat-message.bot {
+            background-color: #4c6e7d;
+            text-align: left;
+            margin-right: auto;
+        }
+        .chat-message.user {
+            background-color: #4c4f58;
+            text-align: right;
+            margin-left: auto;
+        }
+        #user-input {
+            width: 80%;
+            padding: 10px;
+            margin-top: 20px;
+            border-radius: 5px;
+            border: none;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #ff8c00;
+            border: none;
+            color: white;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #e07b00;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Crescendo Mood Playlist</h1>
+</header>
+
+<nav>
+    <a href="INDEXTRY1.html" style="background-color: #1e1e2f; padding: 5px 10px; border-radius: 5px;">Home</a>
+</nav>
+
+<div id="chat-container">
+    <div class="chat-message bot" id="bot-message">
+        Crescendo: Hello! How may I assist you today?
+    </div>
+</div>
+
+<input type="text" id="user-input" placeholder="Type your response...">
+<button onclick="sendMessage()">Submit</button>
+
+<script>
+    let currentMood = ""; // Set mood based on user input if needed
+
+    // Add event listener for the Enter key
+    document.getElementById("user-input").addEventListener("keypress", function (event) {
+        if (event.key === "Enter") {
+            sendMessage();
+        }
+    });
+
+    function sendMessage() {
+        let userMessage = document.getElementById("user-input").value;
+        if (!userMessage) return;
+
+        // Display user message in the chat
+        let userMessageElement = document.createElement("div");
+        userMessageElement.classList.add("chat-message", "user");
+        userMessageElement.innerText = "You: " + userMessage;
+        document.getElementById("chat-container").appendChild(userMessageElement);
+
+        // Clear the input field
+        document.getElementById("user-input").value = "";
+
+        // Make an API call to the backend (placeholder logic)
+        fetch('/api/chatbot', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                user_input: userMessage,
+                current_mood: currentMood
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            // Display bot response
+            let botMessageElement = document.createElement("div");
+            botMessageElement.classList.add("chat-message", "bot");
+            botMessageElement.innerText = "Crescendo: " + data.response;
+            document.getElementById("chat-container").appendChild(botMessageElement);
+
+            // Scroll to the latest message
+            document.getElementById("chat-container").scrollTop = document.getElementById("chat-container").scrollHeight;
+        })
+        .catch(error => console.error('Error:', error));
+    }
+</script>
+
+</body>
+</html>
